@@ -47,7 +47,75 @@ There are a couple of ways to add your css to React. It can be a link tag like n
 
 ### 4/27/2018 - App Component
 We create an `App (App.js)` component that becomes the main component that holds other components. This component gets imported to our `index.js` file, but components can also be imported into other components, our `header, inventory, and order` components will be imported into our our App component. Some tips or things to remember:
-    * Component files start with a capital letter, `App.js`, not `app.js`
-    * Don't forget to export default your component `export default App`
-    * Applying classes to the elements, we are in jsx, not html, use `className=...` not `class=...`
-    * Any returned items should be wrapped in parenthesis so you can format nicely across lines
+* Component files start with a capital letter, `App.js`, not `app.js`
+* Don't forget to export default your component `export default App`
+* Applying classes to the elements, we are in jsx, not html, use `className=...` not `class=...`
+* Any returned items should be wrapped in parenthesis so you can format nicely across lines
+
+Really what you need to be thinking about at this point is what your app is going to look like and all the 'boxes' that you are going to need to hold your elements. It's almost as if you are creating a wireframe and then rendering those elements that will be holding your other elements as components. At this point, you should have an outline of your layout of your application. 
+
+### 4/27/2018 - Props Introduction & Stateless functional components
+What I remember from the react tutorial on reactjs.org is that props are properties of that allow you to pass data to components. Wes Bos describes it as state is home/where the data lives and props are the bus that gets the data where it needs to go. 
+
+They look like attributes on an html element, `<Header tagline="Fresh Seafood Market"></Header>`. 
+
+If your component only has a render method and prop types, then you don't need a class or react component, you can change your component to a stateless functional component which is a javascript function. 
+
+One of the hardest things about JavaScript is that there are a million ways to write something. An example is that you can write your functional component in any one of the following ways:
+
+Function:
+```
+    function Header(props){
+        return (
+            <header className="top">
+                <h1>Catch 
+                    <span className="ofThe">
+                        <span className="of">Of</span>
+                        <span className="the">The</span>
+                    </span>
+                 Day</h1>
+                <h3 className="tagline">
+                    <span>{props.tagline}</span>
+                </h3>
+         </header>   
+     )
+ }
+```
+
+ES6 Function:
+```
+    const Header = (props) => {
+        return (
+            <header className="top">
+                ...
+                <h3 className="tagline">
+                    <span>{props.tagline}</span>
+                </h3>
+            </header>
+        )
+    }
+```
+
+ES6 Function with implicit return:
+```
+    const Header = (props) => (
+        <header className="top">
+            ...
+            <h3 className="tagline">
+                <span>{props.tagline}</span>
+            </h3>
+        </header>
+    );
+```
+
+ES6 Function with implicit return and destructuring props into their own variables:
+```
+    const Header = ({tagline, prop2, prop3, ...}) => (
+        <header className="top">
+            ...
+            <h3 className="tagline">
+                <span>{tagline}</span>
+            </h3>
+        </header>
+    );
+```

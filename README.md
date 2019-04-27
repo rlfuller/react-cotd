@@ -30,7 +30,7 @@ My takeaways for creating components:
 1. Most people use JSX, but you could call `React.createElement()` to render your components that way, but you would probably be pretty sad if you did. 
 2. You cannot return sibling elements, so you can wrap them in `<React.Fragment>`
 3. Since we are returning our component, best to wrap it in parenthesis () so we can avoid any js mischief with automatic semicolon insertion after a return if we happend to add a new line for formatting
-4. Wes Bos mentioned that comments need to be js comments inside of curly braces, `{ /* comment */}`, but I tried regular html comments `//comment` and those seemed to work. Actually, they worked outsie of elements, but when you are inside the jsx, then you need to use a js comment inside curly braces
+4. Wes Bos mentioned that comments need to be js comments inside of curly braces, `{ /* comment */}`, but I tried regular html comments `//comment` and those seemed to work. Actually, they worked outsie of elements, but when you are inside the jsx, then you need to use a js comment inside curly braces, `{/* comment */}`
 ```
     //these are ok here, but not inside the jsx
         

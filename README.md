@@ -41,3 +41,13 @@ My takeaways for creating components:
                 <button type="submit">Visit Store -></button>
             </form>
 ```
+
+### 4/27/2018 - CSS
+There are a couple of ways to add your css to React. It can be a link tag like normal in the html file where the mount point for your application is. You could also create css for each component and import the css for that component into that component.  Another way is to import the css into your starting point for the application (index.js). If your app is created with create-react-app, then under the scenes, react will recognize that this is a css file and handle compiling it and rendering any changes to your app. 
+
+### 4/27/2018 - App Component
+We create an `App (App.js)` component that becomes the main component that holds other components. This component gets imported to our `index.js` file, but components can also be imported into other components, our `header, inventory, and order` components will be imported into our our App component. Some tips or things to remember:
+    * Component files start with a capital letter, `App.js`, not `app.js`
+    * Don't forget to export default your component `export default App`
+    * Applying classes to the elements, we are in jsx, not html, use `className=...` not `class=...`
+    * Any returned items should be wrapped in parenthesis so you can format nicely across lines

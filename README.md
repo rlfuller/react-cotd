@@ -31,7 +31,7 @@ My takeaways for creating components:
 2. You cannot return sibling elements, so you can wrap them in `<React.Fragment>`
 3. Since we are returning our component, best to wrap it in parenthesis () so we can avoid any js mischief with automatic semicolon insertion after a return if we happend to add a new line for formatting
 4. Wes Bos mentioned that comments need to be js comments inside of curly braces, `{ /* comment */}`, but I tried regular html comments `//comment` and those seemed to work. Actually, they worked outsie of elements, but when you are inside the jsx, then you need to use a js comment inside curly braces, `{/* comment */}`
-```
+```jsx
     //these are ok here, but not inside the jsx
         
             <form className="store-selector">
@@ -64,7 +64,7 @@ If your component only has a render method and prop types, then you don't need a
 One of the hardest things about JavaScript is that there are a million ways to write something. An example is that you can write your functional component in any one of the following ways:
 
 Function:
-```
+```javascript
     function Header(props){
         return (
             <header className="top">
@@ -83,7 +83,7 @@ Function:
 ```
 
 ES6 Function:
-```
+```javascript
     const Header = (props) => {
         return (
             <header className="top">
@@ -97,7 +97,7 @@ ES6 Function:
 ```
 
 ES6 Function with implicit return:
-```
+```javascript
     const Header = (props) => (
         <header className="top">
             ...
@@ -109,7 +109,7 @@ ES6 Function with implicit return:
 ```
 
 ES6 Function with implicit return and destructuring props into their own variables:
-```
+```javascript
     const Header = ({tagline, prop2, prop3, ...}) => (
         <header className="top">
             ...
@@ -117,5 +117,28 @@ ES6 Function with implicit return and destructuring props into their own variabl
                 <span>{tagline}</span>
             </h3>
         </header>
+    );
+```
+
+### 4/27/2018 - Routing
+First - routing is easy and fun! Okay, let me elaborate - with React, because it's a library and not a framework, you can use any solution you want for routing, but we are using react-router. So react-router is easy, and fun!!! 
+
+So my comments below are going to refer to react-router. Everything in react is a component, and so is the router. A router is just another react component.  You can define the routes with props.  Routes are defined in a switch. React will check each route definition, looking for a match and if not found, moving on to the next route. 
+
+Below we have the following routes:
+1. An exact match route that is looking for the path `/`. 
+2. A route that is looking for a path that starts with `/store` and has anything after it which will be saved as a storeId variable.
+3. Anything that is not either 1 or 2 will be our 'Not Found' route for a 404. 
+
+```javascript
+    const Router = () => (
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" component={StorePicker} />
+                <Route path="/store/:storeId" component={App} />
+                <Route component={NotFound} />
+
+            </Switch>
+        </BrowserRouter>
     );
 ```

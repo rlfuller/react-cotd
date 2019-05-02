@@ -5,12 +5,12 @@
 ### How to run this app
 4/22/2019 - As of today, I don't really have an application, just have scaffolding and the base of an app. You can run this by cloning this repo from [https://github.com/rlfuller/react-cotd] and then running `npm install` from the cotd folder. Once you have the application loaded, you can start the application by running `npm start`.  Obviously npm is a dependency and you should have a version install > 9. 
 
-### 4/22/2018 - Thoughts on components
+### 4/22/2019 - Thoughts on components
 The building block of react is components and what is a component, a small piece of reusable code. You create your application from these small pieces of reusable.  This reminds me of something I always think of when I'm given a mockup or page that I'm trying to create in html, which is to always imagine boxes around all of the elements that you need and then translate those boxes into html tags. For instance, you need a navigation bar at the top, thats a box and you can use a `<div>` or better, a `<nav>` element. 
 
 It seems like react components are a lot like this, but instead of containing the visual elements,  they also contain the code that makes the functionality around that specific 'box' work. 
 
-### 4/22/2018 - First Component
+### 4/22/2019 - First Component
 My takeaways for creating components:
 1. Import the dependencies, "react' should be lowercase
     - `import React from "react";`
@@ -42,10 +42,10 @@ My takeaways for creating components:
             </form>
 ```
 
-### 4/27/2018 - CSS
+### 4/27/2019 - CSS
 There are a couple of ways to add your css to React. It can be a link tag like normal in the html file where the mount point for your application is. You could also create css for each component and import the css for that component into that component.  Another way is to import the css into your starting point for the application (index.js). If your app is created with create-react-app, then under the scenes, react will recognize that this is a css file and handle compiling it and rendering any changes to your app. 
 
-### 4/27/2018 - App Component
+### 4/27/2019 - App Component
 We create an `App (App.js)` component that becomes the main component that holds other components. This component gets imported to our `index.js` file, but components can also be imported into other components, our `header, inventory, and order` components will be imported into our our App component. Some tips or things to remember:
 * Component files start with a capital letter, `App.js`, not `app.js`
 * Don't forget to export default your component `export default App`
@@ -54,7 +54,7 @@ We create an `App (App.js)` component that becomes the main component that holds
 
 Really what you need to be thinking about at this point is what your app is going to look like and all the 'boxes' that you are going to need to hold your elements. It's almost as if you are creating a wireframe and then rendering those elements that will be holding your other elements as components. At this point, you should have an outline of your layout of your application. 
 
-### 4/27/2018 - Props Introduction & Stateless functional components
+### 4/27/2019 - Props Introduction & Stateless functional components
 What I remember from the react tutorial on reactjs.org is that props are properties of that allow you to pass data to components. Wes Bos describes it as state is home/where the data lives and props are the bus that gets the data where it needs to go. 
 
 They look like attributes on an html element, `<Header tagline="Fresh Seafood Market"></Header>`. 
@@ -120,7 +120,7 @@ ES6 Function with implicit return and destructuring props into their own variabl
     );
 ```
 
-### 4/27/2018 - Routing
+### 4/27/2019 - Routing
 First - routing is easy and fun! Okay, let me elaborate - with React, because it's a library and not a framework, you can use any solution you want for routing, but we are using react-router. So react-router is easy, and fun!!! 
 
 So my comments below are going to refer to react-router. Everything in react is a component, and so is the router. A router is just another react component.  You can define the routes with props.  Routes are defined in a switch. React will check each route definition, looking for a match and if not found, moving on to the next route. 
@@ -141,4 +141,29 @@ Below we have the following routes:
             </Switch>
         </BrowserRouter>
     );
+```
+
+### 5/2/2019 - Handling Events
+My nemesis is back ... `this`. 
+In order to access `this` when you are in a custom method, there are a couple of different ways you can do it, but it seems like perhaps the easiest way, is to create your method as a property on the component and then set it to a ES6 arrow function which binds `this`. You could do that like this ... (see what I did there ?)
+
+```javascript
+    //property set to an arrow function, which binds this
+    goToStore = (event) => {
+        //1. stop the form from submitting
+        event.preventDefault();
+        
+        //2. get the text from that input
+        const storeName = this.myInput.current.value;
+
+        //3. change the page to /store/whatever they entered
+        this.props.history.push(`/store/${storeName}`);
+    }
+```
+
+We need to acces this because we are trying to access `this` from the goToStore method which is created on our component, but access this inside this method (before we convert the method to a property with a ES6 arrow function) doesn't work because this inside the method is `undefined`. 
+
+When the user clicks the button, we also want to change the url to the store and we can do that using `pushState`. This is available from the props from React Router. Because our component is a child of the Router, we have access to the methods we need without having to pass the component down several levels via props. So with the following, we able to push the url to the the store without reloading the page. 
+```javascript
+    this.props.history.push(`/store/${storeName}`);
 ```

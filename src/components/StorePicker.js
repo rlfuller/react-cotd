@@ -5,7 +5,7 @@ class StorePicker extends React.Component {
     myInput = React.createRef();
 
     //property set to an arrow function, which binds this
-    goToStore = (event) => {
+    goToStore(event) {
         //1. stop the form from submitting
         event.preventDefault();
         
@@ -16,12 +16,11 @@ class StorePicker extends React.Component {
         this.props.history.push(`/store/${storeName}`);
     }
 
-
     render(){
         return (
         // <React.Fragment>
         
-            <form className="store-selector" onSubmit={this.goToStore}>
+            <form className="store-selector" onSubmit={this.goToStore.bind(this)}>
                 <h2>Please Enter A Store</h2>
                 <input 
                     type="text" 

@@ -167,3 +167,14 @@ When the user clicks the button, we also want to change the url to the store and
 ```javascript
     this.props.history.push(`/store/${storeName}`);
 ```
+
+### 5/4/2019 - State
+There was a lot going on in lesson 13, which was the first of what looks like 9 lessons on state alone. This lesson was called "Understanding State", and I'll be honest, I don't understand yet. But I"m getting there. 
+
+Some initial takeaways: 
+1. All forms have a `reset()` method that will clear the form. Not about state, but I still learned something there. 
+2. State is an object that lives inside a component and stores all the data for that component and it's childre.
+3. Data is kept in state and react "reacts" to any changes and will update all the places that data is being used
+4. Every component can have it's own state, but it's more common to have state on the parent component & have that parent component pass the state down to it's children
+5. How do we pass the state from the parent component to it's children? How do we pass anything in react? With `props'. 
+6. In react, in order to update state, need to use the `setState` api. 

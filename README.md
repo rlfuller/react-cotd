@@ -178,3 +178,6 @@ Some initial takeaways:
 4. Every component can have it's own state, but it's more common to have state on the parent component & have that parent component pass the state down to it's children
 5. How do we pass the state from the parent component to it's children? How do we pass anything in react? With `props'. 
 6. In react, in order to update state, need to use the `setState` api. 
+
+### 5/8/2019 to 5/18/2019 - Trip to Charleston and a stressful week at work
+So last week Wednesday to Sunday, we went to Charleston, SC and this this past week, I felt like I needed a vacation from the mini-vacation which wasn't so much of a vacation due to the fact that I was still working during the data plus an overly obtrustive airbnb situation so no react work got done.  :(/).

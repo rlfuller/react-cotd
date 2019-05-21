@@ -180,4 +180,15 @@ Some initial takeaways:
 6. In react, in order to update state, need to use the `setState` api. 
 
 ### 5/8/2019 to 5/18/2019 - Trip to Charleston and a stressful week at work
-So last week Wednesday to Sunday, we went to Charleston, SC and this this past week, I felt like I needed a vacation from the mini-vacation which wasn't so much of a vacation due to the fact that I was still working during the data plus an overly obtrustive airbnb situation so no react work got done.  :(/).
+So last week Wednesday to Sunday, we went to Charleston, SC and then this past week, I felt like I needed a vacation from the mini-vacation which wasn't so much of a vacation due to the fact that I was still working during the day plus had to deal with an overly obtrustive Airbnb situation ending with a really, really bad interview so no react work got done.  :(/).
+
+### 5/8/21 - Props and State (lesson 14)
+So really this should be called props, props and more props. The answer to your qustion is `props`. 
+
+*Some things to remember!!*
+Any custom function that updates state neds to live in the same component that state lives in. 
+
+How do you get a function from one component to another component? Props. 
+How does anything get anywhere? Props. 
+
+Anything that is passed into a component is on the `props` object in that component. 

@@ -182,7 +182,7 @@ Some initial takeaways:
 ### 5/8/2019 to 5/18/2019 - Trip to Charleston and a stressful week at work
 So last week Wednesday to Sunday, we went to Charleston, SC and then this past week, I felt like I needed a vacation from the mini-vacation which wasn't so much of a vacation due to the fact that I was still working during the day plus had to deal with an overly obtrustive Airbnb situation ending with a really, really bad interview so no react work got done.  :(/).
 
-### 5/8/21 - Props and State (lesson 14)
+### 5/21/2019 - Props and State (lesson 14)
 So really this should be called props, props and more props. The answer to your qustion is `props`. 
 
 *Some things to remember!!*
@@ -192,3 +192,14 @@ How do you get a function from one component to another component? Props.
 How does anything get anywhere? Props. 
 
 Anything that is passed into a component is on the `props` object in that component. 
+
+### 5/21/2019 - Displaying State with JSX (lesson 15)
+Here we update update our inventory component with data from state. The data we have in state is an object of fish objects. To display these on the inventory component, we are going to use plain old js to iterate over them. Since they are objects and not an array, we will use Object.keys to interate over the keys, then map to get the values of the keys. 
+
+```javascript
+    <ul className="fishes">
+        {Object.keys(this.state.fishes).map(key => <Fish key={key} details={this.state.fishes[key]} />)}
+    </ul>
+```
+
+Inside the `.map()` we are returning a `<Fish />` component. If you notice inside the component, we have a `prop` called `key`.  If you don't have this, you get a react error `Each child in an array or iterator should have a unique "key" prop.`.  In order for react to be fast, it has to be able to quickly access the piece of component that is being updated. In order to do this, you have to give it a unique identifer to it's data. react supplies a built-in prop called `key` and you can assign it anything as long as it's unique.  So in the example above, we are assigning it the object key which is unique as it contains a unique identifier for each fish. 

@@ -11,11 +11,11 @@ class AddFishForm extends React.Component {
         //1. stop the form from submitting
         event.preventDefault();
         const fish = {
-            nameRef: this.nameRef.current.value,
-            priceRef: parseFloat(this.priceRef.current.value),
-            statusRef: this.statusRef.current.value,
-            imageRef: this.imageRef.current.value,
-            descRef: this.descRef.current.value
+            name: this.nameRef.current.value,
+            price: parseFloat(this.priceRef.current.value),
+            status: this.statusRef.current.value,
+            image: this.imageRef.current.value,
+            desc: this.descRef.current.value
         };
         this.props.addFish(fish);
 
@@ -34,7 +34,7 @@ class AddFishForm extends React.Component {
                 </select>
                 <textarea name="desc" ref={this.descRef} placeholder="Description"></textarea>
                 <input name="image" ref={this.imageRef} type="text" placeholder="Image"/>
-                <button type="submit">Add Fish</button>
+                <button type="submit">+ Add Fish</button>
             </form>
         );
     }

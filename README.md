@@ -203,3 +203,42 @@ Here we update update our inventory component with data from state. The data we 
 ```
 
 Inside the `.map()` we are returning a `<Fish />` component. If you notice inside the component, we have a `prop` called `key`.  If you don't have this, you get a react error `Each child in an array or iterator should have a unique "key" prop.`.  In order for react to be fast, it has to be able to quickly access the piece of component that is being updated. In order to do this, you have to give it a unique identifer to it's data. react supplies a built-in prop called `key` and you can assign it anything as long as it's unique.  So in the example above, we are assigning it the object key which is unique as it contains a unique identifier for each fish. 
+
+### 5/25/2019 - Updating State (lesson 16)
+Here we are updating the order state with a similar process to how we updated the fish state. The steps to follow are:
+1. Take a copy of state (don't mutate the data)
+2. Do whatever calculations or operations you need to do on the copy of state
+3. Call `setState()` passing in the copy of state you took in step 1 and manipulated in step 2. 
+React will copy over the existing state with the new state, and recognizing that there is a change, will update all areas in your application that have a reference to that state. 
+
+The other thing to remember is that any methods that you need that will be updating state need to live on the same component that state lives in. In our case, this is our App component, which we can think of as the top of the tree, or parent component. It has child components for Order and Inventory (fish), which have their own state. This state lives on the parent component and gets passed down to the child components via props. 
+
+The last lesson, or maybe it was two lessons ago, we learned that if you are iterating over state and displaying values you need to use a prop called `key` and give each value a unique id so that react can more easily 'react'.  We did this with the fishes state, displaying each fish in a ul. You can see that below in teh line `key={key}`.
+```javascript
+    render(){
+        return (
+            <div className="catch-of-the-day">
+                <div className="menu">
+                    <Header tagline="Fresh Seafood Market"></Header>
+                    <ul className="fishes">
+                        {Object.keys(this.state.fishes).map(key => (
+                            <Fish 
+                                key={key} 
+                                index={key}
+                                details={this.state.fishes[key]} 
+                                addToOrder={this.addToOrder}
+                            />
+                        ))}
+                    </ul>
+                </div>
+                <Order></Order>
+                <Inventory 
+                    addFish={this.addFish}
+                    loadSampleFishes={this.loadSampleFishes}
+                />
+                
+            </div>
+        )
+    };
+```
+In this lesson, in order to update our `Order` component with a unique listing of which fish have been added to it (passed from the App component), we need to pass a unique reference for each fish to Order. Since we have a unique reference using `key`, you would think that you can just use the `key` prop. However, we can't. So if you need to pass a key to another component, you have to create a second prop but call it anything other than `key`. You will see that above with the `index={key}` prop. So we've created our own prop (remember the key prop is a delivered react prop) called `index` and assigned it's value to be the key.  So why do we need to create a second prop and use anything other than `key` as the name? The answer is that I"m still not sure why. But according to this stack overflow [https://stackoverflow.com/questions/33661511/reactjs-key-undefined-when-accessed-as-a-prop] and especially the posting by `sebmarkbage` here: [https://github.com/facebook/react/issues/2429], `key` is not really a property. It's used by react internals and is used to determine what value should be in a slot, but not the actual value, which is why we need to create our own prop. 

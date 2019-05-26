@@ -242,3 +242,40 @@ The last lesson, or maybe it was two lessons ago, we learned that if you are ite
     };
 ```
 In this lesson, in order to update our `Order` component with a unique listing of which fish have been added to it (passed from the App component), we need to pass a unique reference for each fish to Order. Since we have a unique reference using `key`, you would think that you can just use the `key` prop. However, we can't. So if you need to pass a key to another component, you have to create a second prop but call it anything other than `key`. You will see that above with the `index={key}` prop. So we've created our own prop (remember the key prop is a delivered react prop) called `index` and assigned it's value to be the key.  So why do we need to create a second prop and use anything other than `key` as the name? The answer is that I"m still not sure why. But according to this stack overflow [https://stackoverflow.com/questions/33661511/reactjs-key-undefined-when-accessed-as-a-prop] and especially the posting by `sebmarkbage` here: [https://github.com/facebook/react/issues/2429], `key` is not really a property. It's used by react internals and is used to determine what value should be in a slot, but not the actual value, which is why we need to create our own prop. 
+
+### 5/26/2019 - Using Firebase to persist data
+We persisted our inventory data using Firebase [https://firebase.google.com/]. Firebase is a real-time database created by google and its amazing. In order to persist the data, we use rebase. After creating a project online with firebase, we will initialize a new firebase application. 
+
+```javascript
+    import Rebase from "re-base";
+    import firebase from "firebase";
+
+    const firebaseApp = firebase.initializeApp({
+        apiKey: "AIzaSyCSv2Cjt4s2jfIUQT5r0sxxTc7hsKUZJGM",
+        authDomain: "catch-of-the-day-rachelfuller.firebaseapp.com",
+        databaseURL: "https://catch-of-the-day-rachelfuller.firebaseio.com",
+        // projectId: "catch-of-the-day-rachelfuller",
+        // storageBucket: "catch-of-the-day-rachelfuller.appspot.com",
+        // messagingSenderId: "319718295703",
+        // appId: "1:319718295703:web:a207c8f108c87eab"
+    });
+
+    const base = Rebase.createClass(firebaseApp.database());
+
+    //This is a named export
+    export {firebaseApp};
+
+    //this is a defalt export
+    export default base;
+```
+
+Then using react's `componentDidMount()` lifecycle event, we can sync the state to our firebase database. 
+```javascript
+    componentDidMount(){
+        this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`, {
+            context: this,
+            state: "fishes"
+        });
+    }
+```
+What's so amazing about this is that anytime our state changes, react will update all the references to it, including the database ref. 

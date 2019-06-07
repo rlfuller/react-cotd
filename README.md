@@ -24,7 +24,7 @@ My takeaways for creating components:
     - `render(<p>Hello Rachel, I see you trying to learn some stuff!</p>, document.querySelector("#main"));`
 7. If you are passing a React component to render, the tag can either be self-closing or you can use the opening closing tags - either way
     - `render(<StorePicker />, ...)` or `render(<StorePicker></StorePicker>)`
-8. Normally, react componets will be created in their own file. To use react components, they must be imported (so you need to make sure you export them)
+8. Normally, react components will be created in their own file. To use react components, they must be imported (so you need to make sure you export them)
 
 ### JSX Tips
 1. Most people use JSX, but you could call `React.createElement()` to render your components that way, but you would probably be pretty sad if you did. 
@@ -173,7 +173,7 @@ There was a lot going on in lesson 13, which was the first of what looks like 9 
 
 Some initial takeaways: 
 1. All forms have a `reset()` method that will clear the form. Not about state, but I still learned something there. 
-2. State is an object that lives inside a component and stores all the data for that component and it's childre.
+2. State is an object that lives inside a component and stores all the data for that component and it's children.
 3. Data is kept in state and react "reacts" to any changes and will update all the places that data is being used
 4. Every component can have it's own state, but it's more common to have state on the parent component & have that parent component pass the state down to it's children
 5. How do we pass the state from the parent component to it's children? How do we pass anything in react? With `props'. 
@@ -186,7 +186,7 @@ So last week Wednesday to Sunday, we went to Charleston, SC and then this past w
 So really this should be called props, props and more props. The answer to your qustion is `props`. 
 
 *Some things to remember!!*
-Any custom function that updates state neds to live in the same component that state lives in. 
+Any custom function that updates state needs to live in the same component that state lives in. 
 
 How do you get a function from one component to another component? Props. 
 How does anything get anywhere? Props. 

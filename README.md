@@ -202,7 +202,7 @@ Here we update update our inventory component with data from state. The data we 
     </ul>
 ```
 
-Inside the `.map()` we are returning a `<Fish />` component. If you notice inside the component, we have a `prop` called `key`.  If you don't have this, you get a react error `Each child in an array or iterator should have a unique "key" prop.`.  In order for react to be fast, it has to be able to quickly access the piece of component that is being updated. In order to do this, you have to give it a unique identifer to it's data. react supplies a built-in prop called `key` and you can assign it anything as long as it's unique.  So in the example above, we are assigning it the object key which is unique as it contains a unique identifier for each fish. 
+Inside the `.map()` we are returning a `<Fish />` component. If you notice inside the component, we have a `prop` called `key`.  If you don't have this, you get a react error `Each child in an array or iterator should have a unique "key" prop.`  In order for react to be fast, it has to be able to quickly access the piece of component that is being updated. In order to do this, you have to give it a unique identifer to it's data. react supplies a built-in prop called `key` and you can assign it anything as long as it's unique.  So in the example above, we are assigning it the object key which is unique as it contains a unique identifier for each fish. 
 
 ### 5/25/2019 - Updating State (lesson 16)
 Here we are updating the order state with a similar process to how we updated the fish state. The steps to follow are:
@@ -213,7 +213,7 @@ React will copy over the existing state with the new state, and recognizing that
 
 The other thing to remember is that any methods that you need that will be updating state need to live on the same component that state lives in. In our case, this is our App component, which we can think of as the top of the tree, or parent component. It has child components for Order and Inventory (fish), which have their own state. This state lives on the parent component and gets passed down to the child components via props. 
 
-The last lesson, or maybe it was two lessons ago, we learned that if you are iterating over state and displaying values you need to use a prop called `key` and give each value a unique id so that react can more easily 'react'.  We did this with the fishes state, displaying each fish in a ul. You can see that below in teh line `key={key}`.
+The last lesson, or maybe it was two lessons ago, we learned that if you are iterating over state and displaying values you need to use a prop called `key` and give each value a unique id so that react can more easily 'react'.  We did this with the fishes state, displaying each fish in a ul. You can see that below in the line `key={key}`.
 ```javascript
     render(){
         return (

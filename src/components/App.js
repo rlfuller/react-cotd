@@ -13,15 +13,28 @@ class App extends React.Component {
     };
 
     componentDidMount(){
+        //first reinstate our local storage
+        const localStorageRef = localStorage.getItem(this.props.match.params.storeId);
+        if(localStorageRef){
+            this.setState({order: JSON.parse(localStorageRef)});
+        }
+        console.log(localStorageRef);
         this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`, {
             context: this,
             state: "fishes"
         });
     }
 
+    componentDidUpdate(){
+        localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));
+        console.log("it updated");
+    }
+
     componentWillUnmount(){
         base.removeBinding(this.ref);
     }
+
+    
 
     addFish = fish => {
         console.log("adding a fish");

@@ -59,6 +59,15 @@ class App extends React.Component {
         this.setState({fishes:fishes});
     }
 
+    deleteFish = (key) => {
+        //1. Take a copy of state
+        const fishes = {...this.state.fishes};
+        //2. update the state (here we are removing an item - set the fish we don't want to null)
+        fishes[key] = null;
+        //3. update state
+        this.setState({fishes:fishes});
+    }
+
     loadSampleFishes = () => {
         this.setState({fishes: sampleFishes});
     };
@@ -68,6 +77,17 @@ class App extends React.Component {
         const order = {...this.state.order};
         //2. either add to order or update the number in the order
         order[key] = order[key] + 1 || 1;
+        //3. call setState to update our state object
+        this.setState({order: order});
+    }
+
+    removeFromOrder = (key) => {
+        //1. take in a copy of state
+        const order = {...this.state.order};
+        //2. remove that item from order
+        //since we are not mirroring order to firebase, we don't have to set
+        //to null, instead we can remove the key
+        delete order[key];
         //3. call setState to update our state object
         this.setState({order: order});
     }
@@ -88,11 +108,15 @@ class App extends React.Component {
                         ))}
                     </ul>
                 </div>
-                <Order fishes={this.state.fishes} order={this.state.order}>
+                <Order
+                    fishes={this.state.fishes}
+                    order={this.state.order}
+                    removeFromOrder={this.removeFromOrder}>
                 </Order>
                 <Inventory 
                     addFish={this.addFish}
                     updateFish={this.updateFish}
+                    deleteFish={this.deleteFish}
                     loadSampleFishes={this.loadSampleFishes}
                     fishes={this.state.fishes}
 

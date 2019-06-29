@@ -298,3 +298,63 @@ The other question that I had was really about `componentDidUpdate()` was 'which
 
 ### 6/23/2019 - Editing data
 Today we create an edit form for the fish. For this edit form, we set the values in the form from state. However, if you then try to edit the form, you will see that nothing happens and why is this? Because React is expecting an onChange event to handle when state changes. The trick is to update state each time our data is edited. Which we do the way we have done everything else ... yes, props! The patterns are becoming more clear the more time we do this.
+
+### 6/29/2019 - Removing from state
+Removing items from state follows the same logic as adding items to state in that you always take a copy of state first, then instead of adding, you delete, then you update React state by calling `setState()` and passing in the object that you want to update. 
+
+When we delete a fish from inventory, because this data is persisted in firebase, we set the value to null, which will automagically update correctly in firebase. It's a firebase thing. 
+
+```javascript
+    deleteFish = (key) => {
+        //1. Take a copy of state
+        const fishes = {...this.state.fishes};
+        //2. update the state (here we are removing an item - set the fish we don't want to null)
+        fishes[key] = null;
+        //3. update state
+        this.setState({fishes:fishes});
+    }
+```
+
+When we delete an item from an order, because this data is not persisted in firebase (it's only saved to local storage), we can actually delete the key from the object. 
+
+```javascript
+    removeFromOrder = (key) => {
+        //1. take in a copy of state
+        const order = {...this.state.order};
+        //2. remove that item from order
+        //since we are not mirroring order to firebase, we don't have to set
+        //to null, instead we can remove the key
+        delete order[key];
+        //3. call setState to update our state object
+        this.setState({order: order});
+    }
+```
+
+Then we can add a button where we need it and on `onClick`, we can use an inline function to call these methods. 
+
+```javascript
+     return (
+        <li key={key}>
+            {count} lbs {fish.name}
+            {formatPrice(count * fish.price)}
+            <button onClick={()=>this.props.removeFromOrder(key)}>&times;</button>
+        </li>
+    );
+```
+Also, don't forget to update the component for Inventory and Order to pass these methods down as props!!! 
+
+```javascript
+    <Order
+        fishes={this.state.fishes}
+        order={this.state.order}
+        removeFromOrder={this.removeFromOrder}>
+    </Order>
+    <Inventory 
+        addFish={this.addFish}
+        updateFish={this.updateFish}
+        deleteFish={this.deleteFish}
+        loadSampleFishes={this.loadSampleFishes}
+        fishes={this.state.fishes}
+
+    />
+```
